@@ -1,0 +1,202 @@
+/* General reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f6f8fa;
+  color: #333;
+  line-height: 1.5;
+  font-size: 14px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);/* General styling for the body */
+  body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+  }
+  
+  /* Container styling */
+  .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 10px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Title styling */
+  .title {
+      font-size: 24px;
+      text-align: center;
+  }
+  
+  /* Subtitle styling */
+  .subtitle {
+      font-size: 18px;
+      margin-top: 0;
+  }
+  
+  /* Styling for the response container */
+  .response-container {
+      margin-bottom: 20px;
+  }
+  
+  /* Styling for the output text area */
+  .saml-output {
+      white-space: pre-wrap; /* Ensures the SAML response is formatted correctly */
+      word-wrap: break-word;
+      background-color: #f9f9f9;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: monospace;
+  }
+  
+  /* Fields container styling */
+  .fields-container table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+  }
+  
+  .fields-container td {
+      padding: 8px;
+      border: 1px solid #ddd;
+      vertical-align: top; /* Ensures top alignment of content */
+  }
+  
+  .field-label {
+      font-weight: bold;
+      padding-right: 10px;
+  }
+  
+  /* Styling for the buttons */
+  .footer {
+      margin-top: 20px;
+      text-align: center;
+  }
+
+}
+
+.title {
+  font-size: 24px; /* Slightly larger title */
+  text-align: center;
+  color: #007b4f;
+  padding-top: 5px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.response-container {
+  margin-bottom: 20px;
+}
+
+.saml-output {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 4px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  max-height: 250px; /* Increased height for better view */
+  overflow-y: auto;
+  font-size: 12px; /* Smaller font for readability */
+}
+
+.fields-container {
+  margin-bottom: 20px;
+}
+
+.field {
+  margin-bottom: 10px;
+}
+
+.field label {
+  margin-right: 10px;
+}
+
+.field-value {
+  font-size: 14px;
+  border-radius: 4px;
+  color: red;
+}
+
+.field-value.ok {
+  color: green;
+}
+
+.btn {
+  background-color: #007b4f;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  width: 100%;
+}
+
+.btn:hover {
+  background-color: #005e3a;
+}
+
+.content {
+  padding: 0 20px 10px 20px;
+
+}
+
+#noResponseMessage {
+  display: block;
+  width: 400px;
+  padding: 20px;
+  text-align: center;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa;
+}
+
+#hostAccessField {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px; /* spacing between checkbox and label */
+  margin: 10px 0;
+}
+
+#hostAccessField label{
+  background-color: aliceblue;
+}

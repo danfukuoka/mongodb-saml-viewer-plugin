@@ -1,0 +1,41 @@
+Privacy Policy for MongoDB SAML Response Viewer
+
+Effective Date: 03/31/2025
+
+1. Introduction
+
+MongoDB SAML Response Viewer does not collect, store, or transmit any data. This Privacy Policy explains how it works.
+
+2. Information We Collect
+
+Our extension does not collect, store, or transmit any personal data. It operates entirely on the user's device and only displays the SAML response for debugging purposes.
+
+3. How We Use Your Information
+
+- The extension processes SAML responses locally to help users debug federated authentication in MongoDB.
+- No data is stored permanently or transmitted to any external server.
+
+4. Data Sharing and Disclosure
+
+We do not share, sell, or rent any user data. Since our extension does not store or transmit data, there is no risk of unauthorized disclosure.
+
+5. Data Retention and Security
+
+- Any captured SAML response is stored temporarily in the user's browser memory and is cleared upon closing the extension or browser.
+- We do not retain any user data beyond the active session.
+
+6. Third-Party Services
+
+This extension does not interact with third-party services, APIs, or external servers. It functions entirely within the user's local browser environment.
+
+7. Your Choices
+
+Users have full control over their SAML responses. Since no data is stored or transmitted, there are no privacy risks associated with the use of this extension.
+
+8. Changes to This Policy
+
+We may update this Privacy Policy as needed. Any changes will be reflected in an updated version with a new effective date.
+
+9. Contact Us
+
+If you have any questions about this Privacy Policy, please contact us at danilofukuoka@gmail.com.

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Atlas SAML Viewer</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Atlas SAML Viewer</h1>
+
+    <!-- Host permission toggle -->
+    <div class="field" id="hostAccessField">
+      
+      <label for="hostAccessToggle">
+        Limit access to https://auth.mongodb.com/sso/saml2
+      </label>
+      <input type="checkbox" id="hostAccessToggle" checked />
+    </div>
+
+    <div id="noResponseMessage" class="message" style="display: none;">
+      Please reauthenticate so the extension can access the SAML response.
+    </div>
+
+    <div id="contentContainer" class="content" style="display: none;">
+      <div class="response-container">
+        <h3 class="subtitle">SAML Response:</h3>
+        <pre id="samlOutput" class="saml-output"></pre>
+      </div>
+
+      <div class="fields-container">
+        <table>
+          <tr>
+            <td class="field-label"><label for="nameID">NameID:</label></td>
+            <td><span id="nameID" class="field-value x">Not Found. This attribute is required.</span></td>
+          </tr>
+          <tr>
+            <td class="field-label"><label for="firstName">firstName:</label></td>
+            <td><span id="firstName" class="field-value x">Not Found. This attribute is required, and its absence could cause issues for new users.</span></td>
+          </tr>
+          <tr>
+            <td class="field-label"><label for="lastName">lastName:</label></td>
+            <td><span id="lastName" class="field-value x">Not Found. This attribute is required, and its absence could cause issues for new users.</span></td>
+          </tr>
+          <tr>
+            <td class="field-label"><label for="memberOf">memberOf:</label></td>
+            <td><span id="memberOf" class="field-value x">Not Found. This attribute is required if you intend to use Role Mappings.</span></td>
+          </tr>
+        </table>
+      </div>
+
+      <button id="copyButton" class="btn" disabled>Copy to Clipboard</button>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
