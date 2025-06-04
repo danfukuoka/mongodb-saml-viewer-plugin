@@ -5,6 +5,7 @@
   box-sizing: border-box;
 }
 
+/* General styling for the body */
 body {
   font-family: 'Arial', sans-serif;
   background-color: #f6f8fa;
@@ -17,123 +18,89 @@ body {
   align-items: center;
 }
 
+/* Container styling */
 .container {
   width: 100%;
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);/* General styling for the body */
-  body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-  }
-  
-  /* Container styling */
-  .container {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 10px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Title styling */
-  .title {
-      font-size: 24px;
-      text-align: center;
-  }
-  
-  /* Subtitle styling */
-  .subtitle {
-      font-size: 18px;
-      margin-top: 0;
-  }
-  
-  /* Styling for the response container */
-  .response-container {
-      margin-bottom: 20px;
-  }
-  
-  /* Styling for the output text area */
-  .saml-output {
-      white-space: pre-wrap; /* Ensures the SAML response is formatted correctly */
-      word-wrap: break-word;
-      background-color: #f9f9f9;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-family: monospace;
-  }
-  
-  /* Fields container styling */
-  .fields-container table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-  }
-  
-  .fields-container td {
-      padding: 8px;
-      border: 1px solid #ddd;
-      vertical-align: top; /* Ensures top alignment of content */
-  }
-  
-  .field-label {
-      font-weight: bold;
-      padding-right: 10px;
-  }
-  
-  /* Styling for the buttons */
-  .footer {
-      margin-top: 20px;
-      text-align: center;
-  }
-
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Content styling */
+.content {
+    padding: 0 20px 10px 20px;
+}
+
+/* Title styling */
 .title {
-  font-size: 24px; /* Slightly larger title */
+  font-size: 24px;
   text-align: center;
   color: #007b4f;
   padding-top: 5px;
 }
 
+/* Subtitle styling */
 .subtitle {
   font-size: 16px;
   color: #555;
   margin-bottom: 10px;
 }
 
+/* Response container styling */
 .response-container {
   margin-bottom: 20px;
 }
 
+/* Styling for the output text area */
 .saml-output {
-  font-family: 'Courier New', Courier, monospace;
+  white-space: pre-wrap; /* Ensures the SAML response is formatted correctly */
+  word-wrap: break-word;
   background-color: #f4f4f4;
   padding: 10px;
   border-radius: 4px;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  max-height: 250px; /* Increased height for better view */
+  border: 1px solid #ddd;
+  font-family: monospace;
+  max-height: 250px;
   overflow-y: auto;
-  font-size: 12px; /* Smaller font for readability */
+  font-size: 12px;
 }
 
+/* Fields container styling */
 .fields-container {
   margin-bottom: 20px;
 }
 
+.fields-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.fields-container td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  vertical-align: top;
+}
+
+.field-label {
+  font-weight: bold;
+  padding-right: 10px;
+}
+
+/* Styling for fields and toggle */
 .field {
   margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
 
 .field label {
-  margin-right: 10px;
+  background-color: aliceblue;
 }
 
+/* Field values */
 .field-value {
   font-size: 14px;
   border-radius: 4px;
@@ -144,6 +111,7 @@ body {
   color: green;
 }
 
+/* Button styling */
 .btn {
   background-color: #007b4f;
   color: white;
@@ -159,11 +127,7 @@ body {
   background-color: #005e3a;
 }
 
-.content {
-  padding: 0 20px 10px 20px;
-
-}
-
+/* Message when no SAML response is found */
 #noResponseMessage {
   display: block;
   width: 400px;
@@ -171,6 +135,7 @@ body {
   text-align: center;
 }
 
+/* Scrollbar customization */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -186,17 +151,4 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: #aaa;
-}
-
-#hostAccessField {
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px; /* spacing between checkbox and label */
-  margin: 10px 0;
-}
-
-#hostAccessField label{
-  background-color: aliceblue;
 }

@@ -1,4 +1,4 @@
-let samlResponseMemory = null;
+let samlResponse = null; // Stored in memory (lifetime of the background script)
 
 // Listen to outgoing POST requests and extract SAMLResponse if present
 chrome.webRequest.onBeforeRequest.addListener(
@@ -7,12 +7,9 @@ chrome.webRequest.onBeforeRequest.addListener(
       const formData = details.requestBody.formData;
 
       if (formData && formData.SAMLResponse) {
-        const samlResponsePost = formData.SAMLResponse[0];
-        const decodedSamlPost = atob(samlResponsePost);
-        console.log("Captured SAML Response (POST Binding):", decodedSamlPost);
-
-        // Save SAML response in memory
-        samlResponseMemory = decodedSamlPost;
+        // Save the captured SAMLResponse in memory (background script memory)
+        samlResponse = formData.SAMLResponse[0];
+        console.log("Captured SAML Response (POST Binding):", samlResponse);
       }
     }
   },
@@ -23,6 +20,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 // Respond to popup request with stored SAML response
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "getSamlResponse") {
-    sendResponse({ samlResponse: samlResponseMemory });
+    // Return the SAMLResponse currently stored in memory
+    sendResponse({ samlResponse: samlResponse });
   }
 });

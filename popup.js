@@ -3,21 +3,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Check permission status on load
   chrome.permissions.contains({ origins: ["<all_urls>"] }, function (granted) {
-    // If <all_urls> is granted, uncheck the box (i.e., not restricted)
     toggle.checked = !granted;
   });
 
   // Handle toggle interaction
   toggle.addEventListener("change", function () {
     if (!toggle.checked) {
-      // User wants to allow access to all URLs
       chrome.permissions.request({ origins: ["<all_urls>"] }, function (granted) {
-        if (!granted) toggle.checked = true; // If user cancels, revert checkbox
+        if (!granted) toggle.checked = true;
       });
     } else {
-      // User wants to restrict to only auth.mongodb.com
       chrome.permissions.remove({ origins: ["<all_urls>"] }, function (removed) {
-        if (!removed) toggle.checked = false; // If removal failed, revert checkbox
+        if (!removed) toggle.checked = false;
       });
     }
   });
@@ -34,11 +31,15 @@ document.addEventListener("DOMContentLoaded", function () {
       contentContainer.style.display = "block";
       hostAccessField.style.display = "none";
 
-      const formattedSAML = response.samlResponse;
-      document.getElementById("samlOutput").textContent = formattedSAML;
+      const samlResponse = response.samlResponse;
+
+      // Decode the base64-encoded SAMLResponse to retrieve the XML payload
+      const formattedSamlResponse = formatXML(atob(samlResponse));
+
+      document.getElementById("samlOutput").textContent = formattedSamlResponse;
 
       try {
-        const fields = extractSAMLFields(formattedSAML);
+        const fields = extractSAMLFields(formattedSamlResponse);
         updateField("nameID", fields.nameID);
         updateField("firstName", fields.firstName);
         updateField("lastName", fields.lastName);
@@ -46,24 +47,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         copyButton.disabled = false;
         copyButton.addEventListener("click", function () {
-          const nameID = document.getElementById("nameID").textContent.trim();
-          const firstName = document.getElementById("firstName").textContent.trim();
-          const lastName = document.getElementById("lastName").textContent.trim();
-          const memberOf = document.getElementById("memberOf").innerHTML.trim();
-
-          const copyText = `
-SAML Response:
-${formattedSAML}
-
-Fields:
-NameID: ${nameID}
-First Name: ${firstName}
-Last Name: ${lastName}
-Member Of: ${memberOf}`;
-
-          navigator.clipboard.writeText(copyText).then(function () {
-            copyButton.textContent = "Copied! Paste it into your MongoDB support case.";
-            setTimeout(() => (copyButton.textContent = "Copy to Clipboard"), 5000);
+          navigator.clipboard.writeText(samlResponse).then(function () {
+            copyButton.textContent = "Copied.";
+            setTimeout(() => (copyButton.textContent = "Copy SAML Response to Clipboard"), 5000);
           }).catch(console.error);
         });
       } catch (e) {
@@ -101,9 +87,9 @@ function extractSAMLFields(xmlString) {
 
     return {
       nameID: getText("//saml:NameID"),
-      firstName: getText("//saml:Attribute[@Name='firstName']/saml:AttributeValue"),
-      lastName: getText("//saml:Attribute[@Name='lastName']/saml:AttributeValue"),
-      memberOf: getMultiText("//saml:Attribute[@Name='memberOf']/saml:AttributeValue")
+      firstName: getText("//saml:Attribute[@Name='firstName']/*[local-name()='AttributeValue']"),
+      lastName: getText("//saml:Attribute[@Name='lastName']/*[local-name()='AttributeValue']"),
+      memberOf: getMultiText("//saml:Attribute[@Name='memberOf']/*[local-name()='AttributeValue']")
     };
   } catch (e) {
     console.error("Error parsing XML:", e);
@@ -127,4 +113,29 @@ function updateField(fieldId, value) {
   } else {
     element.textContent = value;
   }
+}
+
+// Pretty-print XML with indentation
+function formatXML(xml) {
+  const PADDING = '  '; // 2 spaces
+  const reg = /(>)(<)(\/*)/g;
+  let pad = 0;
+
+  xml = xml.replace(reg, '$1\r\n$2$3');
+  return xml.split('\r\n').map((node) => {
+    let indent = 0;
+    if (node.match(/.+<\/\w[^>]*>$/)) {
+      indent = 0;
+    } else if (node.match(/^<\/\w/)) {
+      if (pad !== 0) pad -= 1;
+    } else if (node.match(/^<\w([^>]*[^/])?>.*$/)) {
+      indent = 1;
+    } else {
+      indent = 0;
+    }
+
+    const line = PADDING.repeat(pad) + node;
+    pad += indent;
+    return line;
+  }).join('\r\n');
 }
